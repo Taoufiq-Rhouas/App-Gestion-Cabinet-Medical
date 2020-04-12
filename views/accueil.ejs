@@ -4,18 +4,17 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
-  <link 
-    rel="stylesheet" 
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
-    crossorigin="anonymous"
-  >
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link 
+      rel="stylesheet" 
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+      crossorigin="anonymous"
+    >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
   </head>
   <body>
-
     <!-- start navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,11 +35,11 @@
             <a href="/" class="btn btn-outline-success my-2 my-sm-0" type="submit" style="color: white;box-shadow: 0 0 0.5em #55efc4;">déconnecter</a>
         </form>
       </div>
-  </nav>
-  <!-- end navbar -->
+    </nav>
+    <!-- end navbar -->
 
-  <!-- start action -->
-  <div class="container mt-5">
+    <!-- start action -->
+    <div class="container mt-5">
       <center><h1 class="text-center">Bienvenue Dans La Section CLIENT</h1></center>
       <div style="display: flex;">
         <img src="../picture/left.png" alt="">
@@ -48,204 +47,104 @@
         <img src="../picture/right.png" alt="">
       </div>
       <table class="table">
-          <thead>
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Ferst Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">CIN</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody id="tablTbody">
+          <% dataclient.forEach(d => { %>
             <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Ferst Name</th>
-              <th scope="col">Last Name</th>
-              <th scope="col">CIN</th>
-              <th scope="col">Action</th>
+              <th scope="row"><%= d.ID %></th>
+              <td><%= d.fname %></td>
+              <td><%= d.lname %></td>
+              <td><%= d.cin %></td>
+              <td>
+                <div>
+                  <a href="/editclient/<%= d.ID %>" style="color: white">
+                    <button type="button" class="btn btn-success"><i class="fas fa-user-edit"></i>
+                      Modifier
+                    </button>
+                  </a>
+                  <a href="/deleteclient/<%= d.ID %>" style="color: white" onclick="return confirm('are u sure ?')">
+                    <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i><i class="fas fa-book-user"></i>
+                      Supprimer
+                    </button>
+                  </a>
+                  <button  class="btn btn-info">
+                    <a href="/visitemedicale/<%= d.cin %>/<%=d.ID%>" style='color: white; text-decoration: none;' onclick="return confirm('Your welcome <%=d.cin%>?')"> <i class="fas fa-address-card" style="font-size: larger;"></i> Gérer Les Visites Médicales</a>
+                  </button>
+                </div>
+              </td>
             </tr>
-          </thead>
-          <tbody id="tablTbody">
-              <% dataclient.forEach(d => { %>
-                  <tr>
-                      <th scope="row"><%= d.ID %></th>
-                      <td><%= d.fname %></td>
-                      <td><%= d.lname %></td>
-                      <td><%= d.cin %></td>
-                      <td>
-                        <div>
-                          <a href="/editclient/<%= d.ID %>" style="color: white">
-                            <button type="button" class="btn btn-success"><i class="fas fa-user-edit"></i>
-                              Modifier
-                            </button>
-                          </a>
-                          <a href="/deleteclient/<%= d.ID %>" style="color: white" onclick="return confirm('are u sure ?')">
-                            <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i><i class="fas fa-book-user"></i>
-                              Supprimer
-                            </button>
-                          </a>
-                          <button  class="btn btn-info">
-                            <a href="/visitemedicale/<%= d.cin %>/<%=d.ID%>" style='color: white; text-decoration: none;' onclick="return confirm('Your welcome <%=d.cin%>?')"> <i class="fas fa-address-card" style="font-size: larger;"></i> Gérer Les Visites Médicales</a>
-                          </button>
-                        </div>
+          <% }) %>
+        </tbody>
+      </table>     
+    </div>
+    <!-- end action -->
 
-                      </td>
-                  </tr>
-              <% }) %>
-          </tbody>
-        </table>     
-  </div>
-  <!-- end action -->
-
-<!-- <h3 class="text-center font-weight-bold mb-4 pb-2">List Client</h3> -->
-
-    <!-- hhhhh whate start -->
-    <!-- <section> -->
-      <!-- <% dataclient.forEach(d => { %> -->
-      <!-- <div class="container py-2 my-2">
-        <section class="p-md-5 mx-md-5 text-center text-lg-left grey z-depth-1" 
-          style="background-image: url(https://mdbootstrap.com/img/Photos/Others/background2.jpg);">
-          <div class="row d-flex justify-content-center">
-            <div class="col-md-10">
-              <div class="card">
-                <div class="card-body m-3">
-                  <div class="row">
-                    <div class="col-lg-4 d-flex mb-2 align-items-center">
-                      <div class="avatar mx-4 w-100 white d-flex justify-content-center align-items-center">
-                        <img src="../picture/i128.png" class="rounded-circle img-fluid z-depth-1" alt="woman avatar">
-                      </div>
-                    </div>
-                    <div class="col-lg-8">
-                      <div style="display: flex;width: 100%;">
-                        <div style="width: 50%;">
-                          <div style="display: flex;">
-                            <p class="font-weight-bold lead mb-2"><strong>ID :</strong></p>
-                            <p class="font-weight-bold text-muted mt-1"><%= d.ID %></p>
-                          </div>
-                          <div style="display: flex;">
-                            <p class="font-weight-bold lead mb-2"><strong>CIN :</strong></p>
-                            <p class="font-weight-bold text-muted mt-1"><%= d.cin %></p>
-                          </div>
-                        </div>
-                        <div style="width: 50%;">
-                          <div style="display: flex;">
-                            <p class="font-weight-bold lead mb-2"><strong class="ml-2">Nom :</strong></p>
-                            <p class="font-weight-bold text-muted mt-1"><%= d.fname %></p>
-                          </div>
-                          <div style="display: flex;">
-                            <p class="font-weight-bold lead mb-2"><strong class="ml-2">Prenom :</strong></p>
-                            <p class="font-weight-bold text-muted mt-1"><%= d.lname %></p>
-                          </div>
-                        </div>
-                      </div>
-                      <hr>
-                      <div style="display: flex;width: 80%;justify-content: space-between;">
-                        <a class="btn btn-primary btn-md mx-0 btn-rounded">Read more</a>
-                        <a class="btn btn-primary btn-md mx-0 btn-rounded">Read more</a>
-                        <a class="btn btn-primary btn-md mx-0 btn-rounded">Read more</a>
-                      </div>
-                      <hr>
-                    </div>
-                  </div>
+    <!-- start fouter -->
+    <div style="padding-top: 28vh; bottom: 0px;width: 100%;">
+      <center>
+        <!-- Footer -->
+        <footer class="page-footer font-small cyan darken-3" style="background-color: #a5b1c2">
+          <!-- Footer Elements -->
+          <div class="container">
+            <!-- Grid row-->
+            <div class="row">
+              <!-- Grid column -->
+              <div class="col-md-12 py-5">
+                <div class="mb-5 flex-center">
+                    <!-- Facebook -->
+                    <a class="fb-ic">
+                    <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                      </a>
+                    <!-- Twitter -->
+                    <a class="tw-ic">
+                      <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                    </a>
+                    <!-- Google +-->
+                    <a class="gplus-ic">
+                      <i class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                    </a>
+                    <!--Linkedin -->
+                    <a class="li-ic">
+                      <i class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                    </a>
+                    <!--Instagram-->
+                    <a class="ins-ic">
+                      <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                    </a>
+                    <!--Pinterest-->
                 </div>
               </div>
+              <!-- Grid column -->
             </div>
+            <!-- Grid row-->
           </div>
-       </section>
-      </div> -->
-      <!-- <% }) %> -->
-    <!-- </section> -->
-    <!-- hhhhh whate end -->
-    
-
-     <!-- start fouter -->
-     <div style="padding-top: 28vh; bottom: 0px;width: 100%;">
-     <center>
-       <!-- <div style="position: relative;bottom: 0px;">
-      <div style="position: absolute;width: 100%;"> -->
-     <!-- Footer -->
-     <footer class="page-footer font-small cyan darken-3" style="background-color: #a5b1c2">
-     
-         <!-- Footer Elements -->
-         <div class="container">
-     
-         <!-- Grid row-->
-         <div class="row">
-     
-             <!-- Grid column -->
-             <div class="col-md-12 py-5">
-             <div class="mb-5 flex-center">
-     
-                 <!-- Facebook -->
-                 <a class="fb-ic">
-                 <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                 </a>
-                 <!-- Twitter -->
-                 <a class="tw-ic">
-                 <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                 </a>
-                 <!-- Google +-->
-                 <a class="gplus-ic">
-                 <i class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                 </a>
-                 <!--Linkedin -->
-                 <a class="li-ic">
-                 <i class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                 </a>
-                 <!--Instagram-->
-                 <a class="ins-ic">
-                 <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
-                 </a>
-                 <!--Pinterest-->
-                 <!-- <a class="pin-ic">
-                 <i class="fab fa-pinterest fa-lg white-text fa-2x"> </i>
-                 </a> -->
-             </div>
-             </div>
-             <!-- Grid column -->
-     
-         </div>
-         <!-- Grid row-->
-     
-         </div>
-         <!-- Footer Elements -->
-     
-         <!-- Copyright -->
-         <div class="footer-copyright text-center py-3">© 2018 Copyright:
-         <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
-         </div>
-         <!-- Copyright -->
-     
-     </footer>
-     <!-- Footer -->
-   <!-- </div>
-  </div> -->
- </center>
-</div>
-
- <!-- end fouter -->
- <script>
-  //  $(document).ready(function(){
-  //     $('.optionHead').hide();
-  //     $('.btnaction').click(function(){
-  //       $('.optionHead').slideToggle(3000);
-  //     });
-  //   });
-  // function myFunction() {
-  //   alert("Page is loaded");
-    
-  // }document.getElementsByClassName('optionHead').style.display= "none !important";
-  // function btnaction(d){
-  //   // alert(d);
-  //   var cls = "."+d;
-  //   // cls.style.display="block";
-  //   $(cls).slideToggle(3000);
-  //   console.log(d);
-    
-  // }
- </script>
-
-
+          <!-- Footer Elements -->
+          <!-- Copyright -->
+          <div class="footer-copyright text-center py-3">© 2018 Copyright:
+          <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+          </div>
+          <!-- Copyright -->
+        </footer>
+        <!-- Footer -->
+      </center>
+    </div>
+    <!-- end fouter -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
-<!-- <link rel="stylesheet" type="text/css" href="../css/scriptaccueil.js" /> -->
-<!-- <script src="../css/scriptaccueil.js"></script> -->
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="../css/scriptaccueil.js" /> -->
+    <!-- <script src="../css/scriptaccueil.js"></script> -->
+  </body>
 </html>
